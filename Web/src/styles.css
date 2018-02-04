@@ -1,1 +1,18 @@
 /* You can add global styles to this file, and also import other style files */
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+
+button {
+  border: none;
+  border-color: transparent;
+  float: right;
+  background-color: #7f8c8d;
+  color: #ecf0f1;
+  font-size: 16px
+}
+
+.parallax {
+  background-image: url("assets/books_wallpaper.jpg");
+  width: 100%;
+  height: 100%;
+}
+

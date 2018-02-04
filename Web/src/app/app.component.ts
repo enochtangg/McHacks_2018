@@ -12,6 +12,7 @@ import 'rxjs/Rx';
 export class AppComponent {
   title = 'app';
   input = '';
+  hidden = false;
   watson: Observable<Watson>;
   watsonObject: Watson;
 
@@ -25,6 +26,9 @@ export class AppComponent {
 
   onClickSubmit() {
     this.postWatson(this.input);
+  }
+  toggleWebApp() {
+    this.hidden = !this.hidden;
   }
 
     //
