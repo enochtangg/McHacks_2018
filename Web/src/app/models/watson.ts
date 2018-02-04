@@ -1,5 +1,7 @@
 export class Watson {
-    tones: Tone[];
+    document_tone: {
+        tones: Tone[]
+    };
 }
 
 export class Tone {

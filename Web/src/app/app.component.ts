@@ -20,6 +20,7 @@ export class AppComponent {
   postWatson(body: string) {
     this.watson = this.watsonService.postWatson(body);
     this.watson.subscribe(res => this.watsonObject = Object.assign({}, res));
+    setTimeout(() => console.log(this.watsonObject.document_tone.tones[0].tone_name), 1000);
   }
 
   onClickSubmit() {
