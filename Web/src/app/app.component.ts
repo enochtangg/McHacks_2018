@@ -16,6 +16,7 @@ export class AppComponent {
   input = '';
   watson: Observable<Watson>;
   watsonObject: Watson;
+  mobile = false;
   url = '';
   tone_id = '';
     anger = 'https://open.spotify.com/embed/user/enochtaangg/playlist/3MXfQQtHqCXx676Zmtvmqn'
@@ -61,6 +62,10 @@ export class AppComponent {
 
   onClickSubmit() {
     this.postWatson(this.input);
+  }
+
+  toggleMobileApp(){
+    this.mobile = !this.mobile;
   }
 
 }
