@@ -1,8 +1,5 @@
 export class Watson {
-    sentence_id: number;
-    text: string;
-    tones: Tone[];
-    
+    tones: Tone[];  
 }
 
 export class Tone {
