@@ -1,22 +1,29 @@
 import { Component } from '@angular/core';
 import { WatsonService } from './services/watsonService.service';
-import { Watson } from './models/watson';
+import { Watson, Reqbody, DbReq } from './models/watson';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/Rx';
+import { OnInit } from '@angular/core/src/metadata/lifecycle_hooks';
+import { AngularFireDatabase } from 'angularfire2/database';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
+export class AppComponent  {
   title = 'app';
-  input = '';
   hidden = false;
   watson: Observable<Watson>;
   watsonObject: Watson;
+  input = '';
 
-  constructor( private watsonService: WatsonService ) { }
+  textObservable: Observable<any>;
+  dbText: DbReq = {
+    text: []
+  };
+
+  constructor( private watsonService: WatsonService, private db: AngularFireDatabase ) { }
 
   postWatson(body: string) {
     this.watson = this.watsonService.postWatson(body);
@@ -25,10 +32,18 @@ export class AppComponent {
   }
 
   onClickSubmit() {
-    this.postWatson(this.input);
+   this.input === '' ? this.getFromDb() : this.postWatson(this.input);
   }
+
   toggleWebApp() {
     this.hidden = !this.hidden;
+  }
+
+  getFromDb() {
+    this.textObservable = this.db.list('/').valueChanges();
+    this.textObservable.subscribe(res => this.dbText.text = Object.assign(res));
+    setTimeout(() => console.log(this.dbText.text[0]), 1000);
+    setTimeout(() => this.postWatson(this.dbText.text[0]), 1000);
   }
 
     //

@@ -6,10 +6,16 @@ import { FormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
 import { WatsonService } from './services/watsonService.service';
 
+// firebase
+import { AngularFireModule } from 'angularfire2';
+import { AngularFireDatabaseModule } from 'angularfire2/database';
+import { AngularFireAuthModule } from 'angularfire2/auth';
+
 // UI
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MatButtonModule, MatCheckboxModule, MatCardModule, MatIconModule} from '@angular/material';
 import { ParticlesModule } from 'angular-particle';
+import { environment } from '../environments/environment';
 
 
 
@@ -27,7 +33,10 @@ import { ParticlesModule } from 'angular-particle';
     MatButtonModule,
     MatCheckboxModule,
     MatCardModule,
-    MatIconModule
+    MatIconModule,
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFireDatabaseModule,
+    AngularFireAuthModule
   ],
   providers: [WatsonService],
   bootstrap: [AppComponent]
