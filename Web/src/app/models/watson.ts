@@ -13,3 +13,7 @@ export class Tone {
 export interface Reqbody {
     text: string;
 }
+
+export interface DbReq {
+    text: string[];
+}
