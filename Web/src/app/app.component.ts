@@ -1,5 +1,8 @@
 import { Component } from '@angular/core';
 import { WatsonService } from './services/watsonService.service';
+import { Watson } from './models/watson';
+import { Observable } from 'rxjs/Observable';
+import 'rxjs/Rx';
 
 @Component({
   selector: 'app-root',
@@ -8,33 +11,41 @@ import { WatsonService } from './services/watsonService.service';
 })
 export class AppComponent {
   title = 'app';
-  input: string = '';
+  input = '';
+  hidden = false;
+  watson: Observable<Watson>;
+  watsonObject: Watson;
 
-  constructor( watsonService: WatsonService ) { }
+  constructor( private watsonService: WatsonService ) { }
 
-  postWatson(body: strig) {
-    this.watsonService.postWatson()
+  postWatson(body: string) {
+    this.watson = this.watsonService.postWatson(body);
+    this.watson.subscribe(res => this.watsonObject = Object.assign({}, res));
+    setTimeout(() => console.log(this.watsonObject.document_tone.tones[0].tone_name), 1000);
   }
 
   onClickSubmit() {
-
+    this.postWatson(this.input);
+  }
+  toggleWebApp() {
+    this.hidden = !this.hidden;
   }
 
-
-    highest_tone = 0;
-    highest_tone_obj;
-    arr_length = watson['tones'].length();
-    highest_tone = watson['tones'][0]['score'];
-    highest_tone_obj = watson['tones'][0];
-
-
-    for (i = 0; i < arr_length; i++){
-      if (watson['tones'][i]['score']; > highest_tone){
-        highest_tone_obj = watson['tones'][i];
-      }
-    }
-
-    url="https://open.spotify.com/embed/user/amanmathur03/playlist/6y6fzFv02yWpiUtkJRLWSg";
+    //
+    // highest_tone = 0;
+    // highest_tone_obj;
+    // arr_length = watson['tones'].length();
+    // highest_tone = watson['tones'][0]['score'];
+    // highest_tone_obj = watson['tones'][0];
+    //
+    //
+    // for (i = 0; i < arr_length; i++){
+    //   if (watson['tones'][i]['score']; > highest_tone){
+    //     highest_tone_obj = watson['tones'][i];
+    //   }
+    // }
+    //
+    // url="https://open.spotify.com/embed/user/amanmathur03/playlist/6y6fzFv02yWpiUtkJRLWSg";
 
 
 }

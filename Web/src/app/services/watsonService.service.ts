@@ -1,21 +1,31 @@
 import {Injectable} from '@angular/core';
-
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Observable } from 'rxjs/Observable';
+import { Reqbody, Watson } from '../models/watson';
+import 'rxjs/Rx';
 
 @Injectable()
 export class WatsonService {
-  ToneAnalyzerV3 = require('watson-developer-cloud/tone-analyzer/v3');
-  tone_analyzer = new ToneAnalyzerV3({
-    username: '••••••••••••••••••••••••••••••••••••',
-    password: '••••••••••••',
-    version_date: '2017-09-21',
-    headers: {
-      'X-Watson-Learning-Opt-Out': 'true'
-    }
-  });
-  params = {
-    'tone_input': require('tone.json'),
-    'content_type': 'application/json'
+
+  private readonly watson_url = 'https://gateway.watsonplatform.net/tone-analyzer/api/v3/tone?version=2017-09-21';
+  reqbody: Reqbody = {
+    text: ''
   };
-  postWatson() {
+
+  constructor( private http: HttpClient ) {  }
+
+  httpOptions = {
+    headers: new HttpHeaders({
+      'content-type': 'application/json',
+      'authorization': 'Basic ZGNmN2ZlYzQtMTkwMi00NTZhLTk0ZjMtODEwODIzODlkM2M1OjJ6RmhpVFkxQnlhMQ=='
+    })
+  };
+
+  postWatson(body: string): Observable<any> {
+    this.reqbody.text = body;
+    return this.http.post(this.watson_url, this.reqbody, this.httpOptions)
+      .map(res => {
+        return res;
+      });
   }
 }
