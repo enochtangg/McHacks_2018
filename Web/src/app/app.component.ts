@@ -28,36 +28,29 @@ export class AppComponent {
   constructor( private watsonService: WatsonService, public sanitizer: DomSanitizer ) { }
 
   postWatson(body: string) {
-      this.watson = this.watsonService.postWatson(body);
-      this.watson.subscribe(res => this.watsonObject = res));
+    this.watson = this.watsonService.postWatson(body);
+  this.watson.subscribe(res => this.watsonObject = Object.assign({}, res));
+
 
       setTimeout(() => console.log(this.watsonObject.document_tone.tones[0].tone_name), 1000)
 
-      setTimeout(() =>     switch(this.watsonObject.document_tone.tones[0].tone_id) {
-              case "sadness":
-                  this.url = this.sad
-                  break;
-              case "anger":
-                  this.url = this.anger
-                  break;
-              case "analytical":
-                  this.url = this.analytical
-                  break;
-              case "fear":
-                  this.url = this.fear
-                  break;
-              case "tentative":
-                  this.url = this.analytical
-                  break;
-              case "joy":
-                  this.url = this.joy
-                  break;
-              case "confidence":
-                  this.url = this.confidence
-                  break;
-              default:
-                this.url = this.joy
-          }, 1000)
+      setTimeout(() => if (this.watsonObject.document_tone.tones[0].tone_id == 'sadness') {
+         this.url = this.sad;
+       } else if (this.watsonObject.document_tone.tones[0].tone_id == 'anger') {
+         this.url = this.anger;
+       } else if (this.watsonObject.document_tone.tones[0].tone_id == 'analytical') {
+         this.url = this.analytical;
+       } else if (this.watsonObject.document_tone.tones[0].tone_id == 'confident') {
+         this.url = this.confident;
+       } else if (this.watsonObject.document_tone.tones[0].tone_id == 'fear') {
+         this.url = this.fear;
+       } else if (this.watsonObject.document_tone.tones[0].tone_id == 'joy') {
+         this.url = this.joy;
+       } else if (this.watsonObject.document_tone.tones[0].tone_id == 'tentative') {
+         this.url = this.tentative
+       } else {
+         this.url = this.joy
+       }}, 1000);
 
 
 
