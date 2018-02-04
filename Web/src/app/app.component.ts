@@ -9,6 +9,7 @@ import { WatsonService } from './services/watsonService.service';
 export class AppComponent {
   title = 'app';
   input = '';
+  hidden = false;
 
   constructor( private watsonService: WatsonService ) { }
 
@@ -18,6 +19,9 @@ export class AppComponent {
 
   onClickSubmit() {
     this.postWatson(this.input);
+  }
+  toggleWebApp() {
+    this.hidden = !this.hidden;
   }
 
     //
