@@ -8,15 +8,15 @@ import { WatsonService } from './services/watsonService.service';
 })
 export class AppComponent {
   title = 'app';
-  input: string = '';
+  input = '';
 
-  constructor( watsonService: WatsonService ) { }
+  constructor( private watsonService: WatsonService ) { }
 
-  postWatson(body: strig) {
-    this.watsonService.postWatson()
+  postWatson(body: string) {
+    this.watsonService.postWatson(body).subscribe(res => console.log(res));
   }
 
   onClickSubmit() {
-
+    this.postWatson(this.input);
   }
 }
