@@ -34,7 +34,7 @@ export class AppComponent {
 
       setTimeout(() => console.log(this.watsonObject.document_tone.tones[0].tone_name), 1000)
 
-      setTimeout(() => if (this.watsonObject.document_tone.tones[0].tone_id == 'sadness') {
+      setTimeout(() => {if (this.watsonObject.document_tone.tones[0].tone_id == 'sadness') {
          this.url = this.sad;
        } else if (this.watsonObject.document_tone.tones[0].tone_id == 'anger') {
          this.url = this.anger;
@@ -47,7 +47,7 @@ export class AppComponent {
        } else if (this.watsonObject.document_tone.tones[0].tone_id == 'joy') {
          this.url = this.joy;
        } else if (this.watsonObject.document_tone.tones[0].tone_id == 'tentative') {
-         this.url = this.tentative
+         this.url = this.analytical;
        } else {
          this.url = this.joy
        }}, 1000);
