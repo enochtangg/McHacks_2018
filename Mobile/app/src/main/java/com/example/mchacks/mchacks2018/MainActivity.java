@@ -116,6 +116,7 @@ public class MainActivity extends AppCompatActivity {
                                 }
                                 textView.setText(stringBuilder.toString());
                                 message = textView.getText().toString();
+                                message = message.replaceAll("\n", " ");
                             }
                         });
                     }
