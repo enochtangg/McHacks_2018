@@ -10,7 +10,10 @@ import android.util.Log;
 import android.util.SparseArray;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.vision.CameraSource;
 import com.google.android.gms.vision.Detector;
@@ -24,6 +27,8 @@ public class MainActivity extends AppCompatActivity {
     SurfaceView cameraView;
     TextView textView;
     CameraSource cameraSource;
+    Button uploadButton;
+    String message;
     final int RequestCameraPermissionID = 1001;
 
 
@@ -108,14 +113,20 @@ public class MainActivity extends AppCompatActivity {
                                 for (int i = 0; i < items.size(); i++){
                                     TextBlock item = items.valueAt(i);
                                     stringBuilder.append(item.getValue());
-                                    stringBuilder.append("\n");
                                 }
                                 textView.setText(stringBuilder.toString());
+                                message = textView.getText().toString();
                             }
                         });
                     }
                 }
             });
         }
+    }
+
+    public void sendToFirebase (View view){
+        FirebaseClient firebaseClient = new FirebaseClient();
+        firebaseClient.sendInfoToDB(message);
+        Toast.makeText(this, "Sent to Firebase", Toast.LENGTH_SHORT).show();
     }
 }
