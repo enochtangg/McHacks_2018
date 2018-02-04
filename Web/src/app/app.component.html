@@ -1,33 +1,42 @@
-<div class="parallax">
-  <div class="container">
-    <mat-card style="background-color: #34495e; top: 50px; margin: auto; height: 250px;">
-      <mat-card-title style="font-size: 250%; color: white;">Immerse</mat-card-title>
-      <mat-card-content style="color: #ecf0f1;">Welcome to the Immerse Web Application. Over the past 3 decades, the
-        percentage Americans adults who read
-        literature has dropped about 14%. The issue we discovered is that due to the rise of modern technologies, movies
-        and other films are more captivating than reading
-        a boring book.
-        That is way we came up with Immerse.
-        By utilizing IBM Watson and the Spotify's API, Immerse reads in text, analyzes the emotion of the text,
-        and play music accordingly to the atmosphere. Text is brought to life and readers can feel more immersed into
-        their novels. Users can either scan text through their mobile devices or simply input the text through this web
-        app.
-      </mat-card-content>
-      <mat-card-actions>
-        <button (click)="toggleWebApp()">Demo Web App
-        </button>
-        <button (click)="toggleMobileApp()"
-                style="margin-right: 10px;">Demo Mobile App
-        </button>
-      </mat-card-actions>
-    </mat-card>
-    <form *ngIf="hidden;" style="margin: auto; padding-top: 50px;">
-      <input class="text-input" [(ngModel)]="input" name="input" type="textarea"
-             style="background-color: #bdc3c7; margin: auto; margin-top: 20px;">
-      <button class="submit-button" (click)="onClickSubmit()" type="submit"
-              style="background-color: #bdc3c7; margin: auto;">Submit
-      </button>
-      <!--<iframe src="{{url}}" width="300" height="380" frameborder="0" allowtransparency="true"></iframe>-->
-    </form>
+<div class="page-1">
+  <div class="title">
+    <p> Welcome to Immersify
   </div>
+  <div class="main-para">
+    <p>  Welcome to the Immerse Web Application. Over the past 30 years, the
+            percentage American adults who read
+            literature has dropped about 14%. The issue we discovered is that due to the rise of modern technologies, movies
+            and other films are more captivating than reading
+            a boring book.
+            That is way we came up with Immerse.
+            By utilizing IBM Watson and the Spotify's API, Immerse reads in text, analyzes the emotion,
+            and plays music accordingly to the atmosphere inspired by the literature. Text is brought to life and readers
+            can feel more immersed into
+            their novels. Users can either scan text through their mobile devices or simply input the text through this web
+            app.
+          </p>
+  </div>
+  <div class="buttons">
+  <a href="#page-2"> <button (click)="toggleWebApp()" class="main-button">Web Application</button> </a>
+  <button (click)="toggleMobileApp()" class="main-button">Mobile Application</button>
+</div>
+  <div class="qr">
+    <img *ngIf="mobile" src="../assets/qr.png">
+  </div>
+</div>
+
+<div class="page-2" id="page-2">
+  <div class="web-app-header">
+    <p> Enter Text Below or Pair With App </p>
+  </div>
+  <div class="blue-bar"> </div>
+
+    <form class="user-input">
+      <textarea class="text-input" [(ngModel)]="input" name="input"  rows="50" ></textarea>
+
+      <button class="main-button submit-button" (click)="onClickSubmit()" type="submit">Submit
+      </button>
+    </form>
+    <iframe *ngIf="url" class="spotify" [src]='sanitizer.bypassSecurityTrustResourceUrl(url)' width="300" height="380" frameborder="0" allowtransparency="true"></iframe>
+
 </div>
