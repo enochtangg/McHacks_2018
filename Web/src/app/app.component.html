@@ -1,6 +1,6 @@
 <div class="page-1">
   <div class="title">
-    <p> Welcome to Immerse
+    <p> Welcome to Immersify
   </div>
   <div class="main-para">
     <p>  Welcome to the Immerse Web Application. Over the past 30 years, the
@@ -17,21 +17,22 @@
           </p>
   </div>
   <div class="buttons">
-  <button (click)="toggleWebApp()" class="main-button">Web Application</button>
+  <a href="#page-2"> <button (click)="toggleWebApp()" class="main-button">Web Application</button> </a>
   <button (click)="toggleMobileApp()" class="main-button">Mobile Application</button>
 </div>
-  <div class="bottom-bar">
+  <div class="qr">
+    <img *ngIf="mobile" src="../assets/qr.png">
   </div>
 </div>
 
-<div class="page-2">
+<div class="page-2" id="page-2">
   <div class="web-app-header">
     <p> Enter Text Below or Pair With App </p>
   </div>
   <div class="blue-bar"> </div>
 
     <form class="user-input">
-      <textarea class="text-input" [(ngModel)]="input" name="input"  rows="50" style="background-color: #bdc3c7; margin: auto; margin-top: 20px;"></textarea>
+      <textarea class="text-input" [(ngModel)]="input" name="input"  rows="50" ></textarea>
 
       <button class="main-button submit-button" (click)="onClickSubmit()" type="submit">Submit
       </button>
